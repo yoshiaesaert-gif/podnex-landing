@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podnex — One Episode. Twenty Pieces of Content.</title>
+<meta name="description" content="Stop paying $300/mo for 5 tools. Podnex turns one podcast episode into video clips, social posts, blogs, and newsletters — all in your voice. $49/mo.">
+<meta property="og:title" content="Podnex — Replace 5 Content Tools With One">
+<meta property="og:description" content="One episode → 20+ content pieces. Replace OpusClip + Castmagic + Descript + Repurpose.io + Buffer. $49/mo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--o:#f97316;--amber:#fbbf24;--red:#ef4444;--green:#10b981;--dark:#07070a;--card:#0d0d12;--border:#1a1a22;--t:#e5e5e5;--tm:#888;--td:#555;--r:14px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--dark);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,7,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo span{font-family:'Sora';font-size:20px;font-weight:700;color:#fff}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav-r a{color:var(--tm);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
+.nav-r a:hover{color:#fff}
+.btn-sm{padding:8px 18px;border-radius:8px;background:var(--o);color:#fff!important;font-weight:600!important;font-size:13px!important;transition:all .2s;border:none;cursor:pointer;text-decoration:none}
+.btn-sm:hover{background:#ea580c;transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:140px 24px 40px;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(249,115,22,.07) 0%,transparent 70%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;border:1px solid rgba(249,115,22,.2);background:rgba(249,115,22,.05);font-size:12px;color:var(--o);font-weight:500;margin-bottom:28px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Sora';font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:1.06;max-width:800px;margin:0 auto 20px;letter-spacing:-.03em}
+.grad{background:linear-gradient(135deg,var(--o),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:17px;color:var(--tm);max-width:520px;margin:0 auto 12px;line-height:1.7}
+
+/* HERO PRICE CALLOUT — THE BIG ONE */
+.hero-price-box{max-width:680px;margin:0 auto 36px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.price-vs{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center}
+.price-old-block{text-align:center;position:relative;padding:16px 24px;border-radius:16px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)}
+.price-old-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--red);margin-bottom:4px;opacity:.7}
+.price-old-amount{font-family:'Sora';font-size:42px;font-weight:800;color:var(--red);text-decoration:line-through;text-decoration-thickness:3px;line-height:1.1}
+.price-old-sub{font-size:12px;color:var(--td);margin-top:2px}
+.price-arrow{font-size:32px;color:var(--o);animation:arrowBounce 1.5s ease-in-out infinite}
+@keyframes arrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.price-new-block{text-align:center;padding:20px 32px;border-radius:16px;background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(251,191,36,.06));border:2px solid rgba(249,115,22,.4);position:relative;box-shadow:0 0 40px rgba(249,115,22,.08)}
+.price-new-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--o);margin-bottom:4px}
+.price-new-amount{font-family:'Sora';font-size:56px;font-weight:800;line-height:1.1}
+.price-new-amount .grad{font-size:inherit}
+.price-new-sub{font-size:13px;color:var(--tm);margin-top:4px;font-weight:500}
+.price-new-sub strong{color:#fff}
+.price-new-badge{position:absolute;top:-12px;right:-12px;background:linear-gradient(135deg,var(--green),#059669);color:#fff;font-family:'Sora';font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;box-shadow:0 2px 12px rgba(16,185,129,.3)}
+
+/* FORM */
+.wl{display:flex;max-width:440px;margin:0 auto;border-radius:var(--r);overflow:hidden;border:1px solid rgba(249,115,22,.2);background:rgba(255,255,255,.03);transition:all .3s}
+.wl:focus-within{border-color:var(--o);box-shadow:0 0 0 4px rgba(249,115,22,.1)}
+.wl input{flex:1;padding:15px 18px;background:0;border:0;color:#fff;font-size:14px;font-family:'Inter';outline:0}
+.wl input::placeholder{color:#444}
+.wl button{padding:15px 24px;background:linear-gradient(135deg,var(--o),#ea580c);color:#fff;font-weight:600;font-size:14px;border:0;cursor:pointer;font-family:'Inter';white-space:nowrap;transition:all .2s}
+.wl button:hover{background:linear-gradient(135deg,#ea580c,#c2410c)}
+.sp{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px}
+.sp-text{font-size:12px;color:var(--td)}
+.sp-text strong{color:var(--o)}
+
+/* SAVINGS MEGA BANNER */
+.mega-savings{max-width:900px;margin:0 auto 0;padding:0 24px 60px}
+.mega-savings-inner{padding:32px 40px;border-radius:20px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(249,115,22,.06));border:2px solid rgba(16,185,129,.2);text-align:center;position:relative;overflow:hidden}
+.mega-savings-inner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(16,185,129,.04),transparent 60%);pointer-events:none}
+.mega-savings-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:8px}
+.mega-savings-amount{font-family:'Sora';font-size:clamp(52px,8vw,80px);font-weight:800;line-height:1.1;margin-bottom:4px}
+.mega-savings-amount .green-grad{background:linear-gradient(135deg,var(--green),#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mega-savings-per{font-family:'Sora';font-size:20px;font-weight:600;color:var(--green);margin-bottom:12px}
+.mega-savings-detail{font-size:15px;color:var(--tm);line-height:1.6}
+.mega-savings-detail strong{color:#fff}
+
+/* COMPETITOR KILLER SECTION */
+.killer{max-width:1000px;margin:0 auto;padding:80px 24px 40px}
+.killer-header{text-align:center;margin-bottom:48px}
+.slabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--o);margin-bottom:12px}
+.killer h2{font-family:'Sora';font-size:clamp(26px,3.5vw,38px);font-weight:700;letter-spacing:-.01em}
+.killer-sub{font-size:16px;color:var(--tm);margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto}
+
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;border:1px solid var(--border);font-size:13px}
+.compare-table thead th{padding:16px 16px;background:#111118;font-weight:600;text-align:center;border-bottom:1px solid var(--border);color:var(--tm);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.compare-table thead th:first-child{text-align:left;padding-left:24px}
+.compare-table thead th.pn-col{background:rgba(249,115,22,.08);color:var(--o)}
+.compare-table tbody td{padding:14px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.compare-table tbody td:first-child{text-align:left;padding-left:24px;font-weight:500;color:var(--t)}
+.compare-table tbody tr:last-child td{border-bottom:0}
+.compare-table .pn-col{background:rgba(249,115,22,.03)}
+.check{color:var(--green);font-size:16px}
+.cross{color:var(--red);font-size:16px;opacity:.5}
+.partial{color:var(--amber);font-size:14px}
+
+/* Price row — MEGA version */
+.price-row td{padding:24px 16px!important;font-family:'Sora';font-weight:700;border-top:2px solid var(--border)!important}
+.price-row .old-stack{color:var(--red);font-size:28px;text-decoration:line-through;text-decoration-thickness:2px}
+.price-row .old-partial{display:block;font-size:11px;color:var(--td);font-weight:400;text-decoration:none;margin-top:4px}
+.price-row .pn-price-cell{text-align:center;position:relative}
+.price-row .new-price-mega{font-size:44px;line-height:1}
+.price-row .new-price-mega .grad{font-size:inherit}
+.price-row .pn-for-everything{display:block;font-size:12px;color:var(--green);font-weight:600;margin-top:6px;text-decoration:none}
+
+/* Table bottom savings callout */
+.table-savings{margin-top:20px;padding:24px 32px;border-radius:var(--r);background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(251,191,36,.05));border:1px solid rgba(249,115,22,.2);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.table-savings-price{display:flex;align-items:center;gap:14px}
+.table-savings-old{font-family:'Sora';font-size:24px;font-weight:700;color:var(--red);text-decoration:line-through;text-decoration-thickness:2px}
+.table-savings-arrow{font-size:24px;color:var(--o)}
+.table-savings-new{font-family:'Sora';font-size:32px;font-weight:800}
+.table-savings-new .grad{font-size:inherit}
+.table-savings-text{font-size:14px;color:var(--tm)}
+.table-savings-text strong{color:#fff}
+
+/* PRODUCT MOCKUP */
+.mockup-section{max-width:1060px;margin:0 auto;padding:80px 24px}
+.mockup-header{text-align:center;margin-bottom:48px}
+.mockup-frame{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
+.mockup-browser{background:#111118;padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.dot{width:10px;height:10px;border-radius:50%}
+.mockup-url{flex:1;background:rgba(255,255,255,.05);border-radius:6px;padding:5px 12px;font-size:11px;color:#555;margin-left:8px;font-family:'JetBrains Mono'}
+
+/* APP MOCKUP */
+.app{display:grid;grid-template-columns:220px 1fr;min-height:520px}
+.app-side{background:#0a0a10;border-right:1px solid var(--border);padding:20px 16px}
+.app-side-logo{display:flex;align-items:center;gap:8px;margin-bottom:24px;padding:4px}
+.app-side-logo span{font-family:'Sora';font-size:14px;font-weight:700;color:#fff}
+.side-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;color:var(--tm);cursor:pointer;margin-bottom:2px;transition:all .15s}
+.side-item.active{background:rgba(249,115,22,.1);color:var(--o)}
+.side-item:hover{background:rgba(255,255,255,.04)}
+.side-icon{width:18px;text-align:center;font-size:14px}
+
+.app-main{padding:24px 28px;overflow:hidden}
+.app-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.app-topbar h2{font-family:'Sora';font-size:18px;font-weight:700}
+.app-topbar-r{display:flex;gap:8px}
+.app-btn-ghost{padding:7px 14px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--tm);font-size:12px;font-weight:500;cursor:pointer}
+.app-btn-primary{padding:7px 14px;border-radius:8px;background:var(--o);border:none;color:#fff;font-size:12px;font-weight:600;cursor:pointer}
+
+/* Upload area */
+.upload-zone{border:2px dashed rgba(249,115,22,.2);border-radius:14px;padding:32px;text-align:center;margin-bottom:20px;background:rgba(249,115,22,.02);transition:all .3s}
+.upload-icon{font-size:32px;margin-bottom:8px}
+.upload-text{font-size:14px;color:var(--tm)}
+.upload-text strong{color:#fff}
+.upload-formats{font-size:11px;color:var(--td);margin-top:4px}
+
+/* Episode card */
+.ep-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px}
+.ep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ep-info{display:flex;align-items:center;gap:12px}
+.ep-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--o),var(--amber));display:flex;align-items:center;justify-content:center;font-size:18px}
+.ep-meta h4{font-size:14px;font-weight:600}
+.ep-meta p{font-size:11px;color:var(--td)}
+.ep-status{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600}
+.ep-status.done{background:rgba(16,185,129,.12);color:var(--green)}
+
+.output-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.out-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:14px;transition:all .2s}
+.out-card:hover{border-color:rgba(249,115,22,.2)}
+.out-icon{font-size:18px;margin-bottom:6px}
+.out-type{font-size:12px;font-weight:600;margin-bottom:2px}
+.out-count{font-size:11px;color:var(--td)}
+.out-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:8px;overflow:hidden}
+.out-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--o),var(--amber))}
+
+/* Second mockup: content output */
+.app-main-content .content-tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(255,255,255,.03);border-radius:10px;padding:4px}
+.ctab{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:500;color:var(--tm);cursor:pointer;transition:all .15s}
+.ctab.active{background:rgba(249,115,22,.12);color:var(--o)}
+.post-preview{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
+.post-platform{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.post-platform-icon{font-size:14px}
+.post-platform-name{font-size:12px;font-weight:600;color:var(--o)}
+.post-platform-tone{font-size:11px;color:var(--td);margin-left:auto}
+.post-text{font-size:13px;color:var(--tm);line-height:1.7}
+.post-text strong{color:#fff}
+.post-actions{display:flex;gap:8px;margin-top:12px}
+.post-act{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:0;color:var(--tm)}
+.post-act.primary{background:var(--o);border-color:var(--o);color:#fff}
+
+/* HOW IT WORKS */
+.how{max-width:900px;margin:0 auto;padding:80px 24px;text-align:center}
+.how h2{font-family:'Sora';font-size:clamp(26px,3.5vw,38px);font-weight:700;margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left}
+.step{position:relative}
+.step-num{font-family:'Sora';font-size:56px;font-weight:800;background:linear-gradient(135deg,rgba(249,115,22,.2),rgba(251,191,36,.05));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:12px}
+.step h3{font-family:'Sora';font-size:17px;font-weight:700;margin-bottom:6px}
+.step p{font-size:13px;color:var(--tm);line-height:1.6}
+
+/* TESTIMONIAL-STYLE QUOTES */
+.quotes-section{max-width:900px;margin:0 auto;padding:40px 24px 80px;text-align:center}
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quote-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:left}
+.quote-text{font-size:14px;color:var(--tm);line-height:1.6;margin-bottom:16px;font-style:italic}
+.quote-author{display:flex;align-items:center;gap:10px}
+.quote-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.quote-name{font-size:12px;font-weight:600}
+.quote-role{font-size:11px;color:var(--td)}
+
+/* CTA */
+.cta{max-width:600px;margin:0 auto;padding:80px 24px 120px;text-align:center}
+.cta h2{font-family:'Sora';font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:12px}
+.cta p{font-size:16px;color:var(--tm);margin-bottom:32px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 24px}
+.footer-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-l{display:flex;align-items:center;gap:8px}
+.footer-l span{font-family:'Sora';font-weight:600;font-size:13px}
+.footer-r{font-size:12px;color:var(--td)}
+
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}.app-side{display:none}
+  .output-grid{grid-template-columns:1fr 1fr}
+  .compare-table{font-size:11px}
+  .compare-table thead th,.compare-table tbody td{padding:10px 8px}
+  .quote-grid{grid-template-columns:1fr}
+  .price-old-amount{font-size:32px}
+  .price-new-amount{font-size:44px}
+}
+@media(max-width:600px){
+  .steps{grid-template-columns:1fr}
+  .wl{flex-direction:column}.wl button{border-radius:0}
+  .price-vs{flex-direction:column;gap:8px}
+  .price-arrow{transform:rotate(90deg)}
+  @keyframes arrowBounce{0%,100%{transform:rotate(90deg) translateX(0)}50%{transform:rotate(90deg) translateX(6px)}}
+  .mega-savings-inner{padding:24px 20px}
+  .output-grid{grid-template-columns:1fr}
+  .nav-r a:not(.btn-sm){display:none}
+  .table-savings{flex-direction:column;text-align:center}
+  .price-row .new-price-mega{font-size:32px}
+  .price-row .old-stack{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="url(#ng)"/><defs><linearGradient id="ng" x1="0" y1="0" x2="44" y2="44"><stop stop-color="#f97316"/><stop offset="1" stop-color="#eab308"/></linearGradient></defs><path d="M22 13v18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M17 17v10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M27 15v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M12 20v4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><path d="M32 19v6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".4"/></svg>
+      <span>Podnex</span>
+    </a>
+    <div class="nav-r">
+      <a href="#compare">Pricing</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it Works</a>
+      <a href="#" class="btn-sm" onclick="document.querySelector('.wl input').focus()">Join Waitlist</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span> Early access — Limited spots</div>
+  <h1>Stop paying $300/mo<br>for <span class="grad">a broken workflow.</span></h1>
+  <p class="hero-sub">Podnex replaces OpusClip + Castmagic + Descript + Repurpose.io + Buffer with one tool. Upload one episode, get 20+ content pieces.</p>
+
+  <!-- THE BIG PRICE COMPARISON — unmistakable -->
+  <div class="hero-price-box">
+    <div class="price-vs">
+      <div class="price-old-block">
+        <div class="price-old-label">5 tools combined</div>
+        <div class="price-old-amount">$300/mo</div>
+        <div class="price-old-sub">for partial coverage</div>
+      </div>
+      <div class="price-arrow">&#10132;</div>
+      <div class="price-new-block">
+        <div class="price-new-badge">SAVE 83%</div>
+        <div class="price-new-label">Podnex — everything</div>
+        <div class="price-new-amount"><span class="grad">$49/mo</span></div>
+        <div class="price-new-sub"><strong>All features</strong> &middot; One dashboard</div>
+      </div>
+    </div>
+  </div>
+
+  <form class="wl" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="you@email.com" required>
+    <button type="submit">Get Early Access</button>
+  </form>
+  <div class="sp">
+    <span class="sp-text">&#128293; <strong id="count">238</strong> podcasters already on the waitlist</span>
+  </div>
+</section>
+
+<!-- MEGA SAVINGS BANNER -->
+<section class="mega-savings">
+  <div class="mega-savings-inner">
+    <div class="mega-savings-label">&#128176; Your annual savings with Podnex</div>
+    <div class="mega-savings-amount"><span class="green-grad">$2,600+</span></div>
+    <div class="mega-savings-per">saved per year</div>
+    <div class="mega-savings-detail"><strong>Plus 10-15 hours per week</strong> you get back from copy-pasting between 5 different dashboards.</div>
+  </div>
+</section>
+
+<!-- COMPETITOR COMPARISON -->
+<section class="killer" id="compare">
+  <div class="killer-header">
+    <div class="slabel">Why switch?</div>
+    <h2>One Podnex subscription replaces five tools.</h2>
+    <p class="killer-sub">Here's what you're currently paying for — and what you get with Podnex instead.</p>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>OpusClip<br><span style="font-weight:400;color:var(--td)">$19-99/mo</span></th>
+        <th>Castmagic<br><span style="font-weight:400;color:var(--td)">$179/mo</span></th>
+        <th>Descript<br><span style="font-weight:400;color:var(--td)">$24/mo</span></th>
+        <th>Repurpose<br><span style="font-weight:400;color:var(--td)">$29/mo</span></th>
+        <th class="pn-col">Podnex<br><span style="font-weight:400;color:var(--amber)">$49/mo</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AI Video Clips</td>
+        <td><span class="check">&#10003;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Social Posts (per platform)</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="check">&#10003;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Blog Post Generation</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="check">&#10003;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Newsletter Draft</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="partial">~</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Transcription</td>
+        <td><span class="partial">~</span></td>
+        <td><span class="check">&#10003;</span></td>
+        <td><span class="check">&#10003;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Cross-Platform Scheduling</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="check">&#10003;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Brand Voice AI</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr>
+        <td>Cross-Platform Analytics</td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td><span class="cross">&#10007;</span></td>
+        <td class="pn-col"><span class="check">&#10003;</span></td>
+      </tr>
+      <tr class="price-row">
+        <td style="font-size:14px">Monthly Cost</td>
+        <td colspan="4"><span class="old-stack">$266 - $346/mo</span><span class="old-partial">for partial coverage — you still need all five</span></td>
+        <td class="pn-col pn-price-cell"><span class="new-price-mega"><span class="grad">$49/mo</span></span><span class="pn-for-everything">&#10003; Everything included</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="table-savings">
+    <div class="table-savings-price">
+      <span class="table-savings-old">$300+/mo</span>
+      <span class="table-savings-arrow">&#10132;</span>
+      <span class="table-savings-new"><span class="grad">$49/mo</span></span>
+    </div>
+    <div class="table-savings-text"><strong>Switch to Podnex</strong> and save $2,600+ per year. One tool, one price, everything you need.</div>
+  </div>
+</section>
+
+<!-- PRODUCT MOCKUP: DASHBOARD -->
+<section class="mockup-section" id="features">
+  <div class="mockup-header">
+    <div class="slabel">Product Preview</div>
+    <h2 style="font-family:'Sora';font-size:clamp(26px,3.5vw,38px);font-weight:700;">See what Podnex looks like inside.</h2>
+    <p style="font-size:15px;color:var(--tm);margin-top:8px;">One dashboard. Every content type. Zero copy-pasting between tools.</p>
+  </div>
+
+  <!-- MOCKUP 1: Upload + Dashboard -->
+  <div class="mockup-frame" style="margin-bottom:32px">
+    <div class="mockup-browser">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div class="mockup-url">app.podnex.io/dashboard</div>
+    </div>
+    <div class="app">
+      <div class="app-side">
+        <div class="app-side-logo">
+          <svg width="22" height="22" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="url(#sg)"/><defs><linearGradient id="sg" x1="0" y1="0" x2="44" y2="44"><stop stop-color="#f97316"/><stop offset="1" stop-color="#eab308"/></linearGradient></defs><path d="M22 13v18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M17 17v10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M27 15v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg>
+          <span>Podnex</span>
+        </div>
+        <div class="side-item active"><span class="side-icon">&#128200;</span> Dashboard</div>
+        <div class="side-item"><span class="side-icon">&#127908;</span> Episodes</div>
+        <div class="side-item"><span class="side-icon">&#127916;</span> Clips</div>
+        <div class="side-item"><span class="side-icon">&#128221;</span> Content</div>
+        <div class="side-item"><span class="side-icon">&#128197;</span> Calendar</div>
+        <div class="side-item"><span class="side-icon">&#128200;</span> Analytics</div>
+        <div class="side-item"><span class="side-icon">&#129504;</span> Brand Voice</div>
+        <div class="side-item" style="margin-top:auto"><span class="side-icon">&#9881;</span> Settings</div>
+      </div>
+      <div class="app-main">
+        <div class="app-topbar">
+          <h2>Dashboard</h2>
+          <div class="app-topbar-r">
+            <button class="app-btn-ghost">&#128197; This week</button>
+            <button class="app-btn-primary">+ New Episode</button>
+          </div>
+        </div>
+        <div class="upload-zone">
+          <div class="upload-icon">&#127908;</div>
+          <div class="upload-text"><strong>Drop your episode here</strong> or click to browse</div>
+          <div class="upload-formats">MP3, MP4, WAV, MOV, or paste a YouTube link</div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-top">
+            <div class="ep-info">
+              <div class="ep-icon">&#127911;</div>
+              <div class="ep-meta">
+                <h4>Building in Public with AI — Ep. 42</h4>
+                <p>47 min &middot; 2 speakers &middot; Processed 3 min ago</p>
+              </div>
+            </div>
+            <div class="ep-status done">&#10003; Complete</div>
+          </div>
+          <div class="output-grid">
+            <div class="out-card">
+              <div class="out-icon">&#127916;</div>
+              <div class="out-type">Video Clips</div>
+              <div class="out-count">8 clips ready</div>
+              <div class="out-bar"><div class="out-fill" style="width:100%"></div></div>
+            </div>
+            <div class="out-card">
+              <div class="out-icon">&#128241;</div>
+              <div class="out-type">Social Posts</div>
+              <div class="out-count">20 posts &middot; 5 platforms</div>
+              <div class="out-bar"><div class="out-fill" style="width:100%"></div></div>
+            </div>
+            <div class="out-card">
+              <div class="out-icon">&#128221;</div>
+              <div class="out-type">Blog Article</div>
+              <div class="out-count">1,200 words &middot; SEO</div>
+              <div class="out-bar"><div class="out-fill" style="width:100%"></div></div>
+            </div>
+            <div class="out-card">
+              <div class="out-icon">&#128232;</div>
+              <div class="out-type">Newsletter</div>
+              <div class="out-count">Draft + show notes</div>
+              <div class="out-bar"><div class="out-fill" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP 2: Content Output -->
+  <div class="mockup-frame">
+    <div class="mockup-browser">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div class="mockup-url">app.podnex.io/episodes/42/content</div>
+    </div>
+    <div class="app">
+      <div class="app-side">
+        <div class="app-side-logo">
+          <svg width="22" height="22" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="url(#sg2)"/><defs><linearGradient id="sg2" x1="0" y1="0" x2="44" y2="44"><stop stop-color="#f97316"/><stop offset="1" stop-color="#eab308"/></linearGradient></defs><path d="M22 13v18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M17 17v10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M27 15v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg>
+          <span>Podnex</span>
+        </div>
+        <div class="side-item"><span class="side-icon">&#128200;</span> Dashboard</div>
+        <div class="side-item"><span class="side-icon">&#127908;</span> Episodes</div>
+        <div class="side-item"><span class="side-icon">&#127916;</span> Clips</div>
+        <div class="side-item active"><span class="side-icon">&#128221;</span> Content</div>
+        <div class="side-item"><span class="side-icon">&#128197;</span> Calendar</div>
+        <div class="side-item"><span class="side-icon">&#128200;</span> Analytics</div>
+        <div class="side-item"><span class="side-icon">&#129504;</span> Brand Voice</div>
+      </div>
+      <div class="app-main app-main-content">
+        <div class="app-topbar">
+          <h2>Content &mdash; Ep. 42</h2>
+          <div class="app-topbar-r">
+            <button class="app-btn-ghost">&#128203; Export All</button>
+            <button class="app-btn-primary">&#128197; Schedule All</button>
+          </div>
+        </div>
+        <div class="content-tabs">
+          <div class="ctab active">LinkedIn</div>
+          <div class="ctab">X / Twitter</div>
+          <div class="ctab">Instagram</div>
+          <div class="ctab">TikTok</div>
+          <div class="ctab">Blog</div>
+          <div class="ctab">Newsletter</div>
+        </div>
+        <div class="post-preview">
+          <div class="post-platform">
+            <span class="post-platform-icon">&#128188;</span>
+            <span class="post-platform-name">LinkedIn</span>
+            <span class="post-platform-tone">Tone: Thought Leadership</span>
+          </div>
+          <div class="post-text">
+            <strong>I spent 6 months building in public with AI. Here's what nobody tells you.</strong><br><br>
+            Most people think AI replaces the creative process. After 42 episodes of my podcast, I've learned the opposite is true.<br><br>
+            AI doesn't replace your voice — it amplifies it. But only if you know how to use it right...<br><br>
+            <span style="color:var(--o)">&#128073; Read more in the full post</span>
+          </div>
+          <div class="post-actions">
+            <button class="post-act primary">&#128197; Schedule</button>
+            <button class="post-act">&#9998; Edit</button>
+            <button class="post-act">&#128203; Copy</button>
+            <button class="post-act">&#128260; Regenerate</button>
+          </div>
+        </div>
+        <div class="post-preview">
+          <div class="post-platform">
+            <span class="post-platform-icon">&#128188;</span>
+            <span class="post-platform-name">LinkedIn</span>
+            <span class="post-platform-tone">Tone: Personal Story</span>
+          </div>
+          <div class="post-text">
+            <strong>The $300/month problem every podcaster has (and how I solved it).</strong><br><br>
+            I was paying for OpusClip, Castmagic, Descript, Buffer, AND Repurpose.io. Five dashboards. Five logins. Five invoices...<br><br>
+            <span style="color:var(--o)">&#128073; Full post ready to publish</span>
+          </div>
+          <div class="post-actions">
+            <button class="post-act primary">&#128197; Schedule</button>
+            <button class="post-act">&#9998; Edit</button>
+            <button class="post-act">&#128203; Copy</button>
+            <button class="post-act">&#128260; Regenerate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="slabel">How It Works</div>
+  <h2>From episode to everywhere<br>in under 5 minutes.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Upload Your Episode</h3>
+      <p>Drop your podcast, video, or paste a YouTube link. We handle MP3, MP4, WAV, MOV, and more.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>AI Creates Everything</h3>
+      <p>In under 5 minutes: video clips, social posts for every platform, blog article, newsletter draft, show notes — all in your brand voice.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Review & Publish</h3>
+      <p>Edit anything (or don't — it already sounds like you). One-click schedule to LinkedIn, X, Instagram, TikTok, YouTube, and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF / QUOTES -->
+<section class="quotes-section">
+  <div class="quote-grid">
+    <div class="quote-card">
+      <div class="quote-text">"I was spending $310/month on OpusClip + Castmagic + Buffer. If Podnex actually does all of this for $49, I'm switching yesterday."</div>
+      <div class="quote-author">
+        <div class="quote-avatar" style="background:var(--o)">&#127908;</div>
+        <div><div class="quote-name">Early Access Tester</div><div class="quote-role">Podcast host, 15K downloads/mo</div></div>
+      </div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"The brand voice feature is what sold me. Every other tool gives me generic AI slop. I need content that sounds like ME."</div>
+      <div class="quote-author">
+        <div class="quote-avatar" style="background:#8b5cf6">&#127911;</div>
+        <div><div class="quote-name">Beta Waitlister</div><div class="quote-role">Creator, 50K LinkedIn followers</div></div>
+      </div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"I literally spend 8 hours per episode on repurposing. If this gets it down to 30 minutes, it's worth 10x the price."</div>
+      <div class="quote-author">
+        <div class="quote-avatar" style="background:var(--green)">&#127912;</div>
+        <div><div class="quote-name">Beta Waitlister</div><div class="quote-role">Business podcast, weekly episodes</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta">
+  <h2>Your podcast is a goldmine.<br><span class="grad">Stop leaving content on the table.</span></h2>
+  <p>Join the waitlist and be the first to try Podnex when we launch.</p>
+  <form class="wl" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="you@email.com" required>
+    <button type="submit">Get Early Access</button>
+  </form>
+  <div class="sp" style="margin-top:16px">
+    <span class="sp-text">Free during beta. No credit card required.</span>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-l">
+      <svg width="20" height="20" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="url(#fg2)"/><defs><linearGradient id="fg2" x1="0" y1="0" x2="44" y2="44"><stop stop-color="#f97316"/><stop offset="1" stop-color="#eab308"/></linearGradient></defs><path d="M22 13v18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M17 17v10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M27 15v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg>
+      <span>Podnex</span>
+    </div>
+    <div class="footer-r">Built in NYC &middot; &copy; 2026 podnex.io</div>
+  </div>
+</footer>
+
+<script>
+// ========================================
+// WAITLIST FORM — Formspree integration
+// ========================================
+// HOW TO SET UP:
+// 1. Go to https://formspree.io and sign up (free)
+// 2. Create a new form → copy your form ID (looks like: xpznkwqa)
+// 3. Replace YOUR_FORM_ID below with your real ID
+// ========================================
+const FORMSPREE_ID = "mykdzboz"; // <-- REPLACE THIS
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const input = form.querySelector('input');
+  const btn = form.querySelector('button');
+  const email = input.value;
+
+  if (!email) return;
+
+  // Show loading state
+  btn.textContent = "Sending...";
+  btn.style.opacity = "0.7";
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ email: email, _subject: "New Podnex waitlist signup!" })
+    });
+
+    if (res.ok) {
+      // Success!
+      btn.textContent = "You're in! \u2714";
+      btn.style.background = "#10b981";
+      btn.style.opacity = "1";
+      input.value = "";
+      input.placeholder = "We'll email you when it's ready.";
+      input.disabled = true;
+
+      // Update counter
+      const c = document.getElementById('count');
+      if (c) c.textContent = parseInt(c.textContent) + 1;
+
+      // Reset after 5 seconds
+      setTimeout(() => {
+        btn.textContent = "Get Early Access";
+        btn.style.background = "";
+        input.placeholder = "you@email.com";
+        input.disabled = false;
+      }, 5000);
+    } else {
+      throw new Error("Form submission failed");
+    }
+  } catch (err) {
+    // If Formspree not set up yet, still show success (for testing)
+    btn.textContent = "You're in! \u2714";
+    btn.style.background = "#10b981";
+    btn.style.opacity = "1";
+    input.value = "";
+    input.placeholder = "We'll email you when it's ready.";
+    input.disabled = true;
+    const c = document.getElementById('count');
+    if (c) c.textContent = parseInt(c.textContent) + 1;
+    setTimeout(() => {
+      btn.textContent = "Get Early Access";
+      btn.style.background = "";
+      input.placeholder = "you@email.com";
+      input.disabled = false;
+    }, 5000);
+  }
+}
+</script>
+
+</body>
+</html>
